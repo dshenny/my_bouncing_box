@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html style = "background-color : black">
+    <div id = "my_bouncing_box" style = "background-color: blue; border-radius: 3px; position: absolute; left: 0px; top: 0px; min-width: 100px; min-height: 100px; text-align: center; font-weight: bold; color: #999;">
+        henny_d
+    </div>
+
+    <script type= "text/javascript">
+        //FPS MEANS "frames per second"
+        FPS = 20
+        bouncingbox= document.getElementById("my_bouncing_box")
+        xPosition = 10;
+        yPosition = 10;
+        // think of xSpeed as direction as well
+        xSpeed = 4;
+        ySpeed = 4;
+        function update() {
+            // console.log("x is " + xPosition)
+            // console.log("y is " + yPosition)
+            bouncingbox.style.left = xPosition + 'px';
+           bouncingbox.style.top = yPosition + 'px';            
+        } 
+        setInterval(function bb() {
+            //xSpeed starts off positive and Once the ">= innerwidth" condition is met(all the way on right side),
+            // then you negate xSpeed and direction shifts toward left side... 
+            //and the xSpeed stays the same until xPosition is "<= 0" (all the way on left side) then direction 
+            //shifts toward right side again... xSpeed sign only changes when 1 out of the 2
+            // conditions of the if statement changes, if not then xSpeed stays the same
+            if (xPosition + bouncingbox.clientWidth >= window.innerWidth || xPosition <= 0) {
+                xSpeed = -xSpeed;
+            }
+            //ySpeed starts off positive and Once the ">= innerheight" condition is met(all the way on the bottom),
+            // then you negate ySpeed and direction shifts toward the top... 
+            //and the ySpeed stays the same until yPosition is "<= 0" (all the way on the top) then direction 
+            //shifts toward the bottom again... ySpeed sign only changes when 1 out of the 2
+            // conditions of the if statement changes, if not then ySpeed stays the same
+             if(yPosition + bouncingbox.clientHeight >= window.innerHeight || yPosition <=0) { 
+                ySpeed = -ySpeed;
+            }
+            xPosition += xSpeed;
+            yPosition += ySpeed;
+            update();
+        } , 1000/FPS)
+    </script>
+
+</html>
+
+
